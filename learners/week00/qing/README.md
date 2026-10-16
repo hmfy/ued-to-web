@@ -157,4 +157,4 @@ docs: 完成启动周作业
 - 仍然不确定：HTML/CSS 只了解概念、没自己写过；JavaScript、React、TypeScript 完全没接触 
 - 最大难点：目前时间比较少
 - 每周预计投入时间：4小时
-- Merge Request 链接：
+- Merge Request 链接：https://github.com/hmfy/ued-to-web/pull/1
