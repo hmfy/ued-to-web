@@ -58,11 +58,11 @@ git switch -c feat/week00-<姓名拼音>
 
 ### 作业二：复制模板并完成环境记录
 
-在个人周分支中，将 Week 00 模板复制到自己的作业目录：
+仓库已经提前建立好每位学员的目录。在个人周分支中，将 Week 00 模板复制到自己的 Week 00 作业目录：
 
 ```bash
-cp -R templates/week00 learners/week00/<姓名拼音>
-cd learners/week00/<姓名拼音>
+cp -R templates/week00 learners/<姓名拼音>/week00
+cd learners/<姓名拼音>/week00
 mkdir -p screenshots
 ```
 
@@ -97,7 +97,7 @@ pnpm dev
 确认个人目录中至少包含以下内容：
 
 ```text
-learners/week00/<姓名拼音>/
+learners/<姓名拼音>/week00/
 ├── README.md
 ├── self-assessment.md
 ├── screenshots/
@@ -110,7 +110,7 @@ learners/week00/<姓名拼音>/
 
 ```bash
 git status
-git add learners/week00/<姓名拼音>/
+git add learners/<姓名拼音>/week00/
 git commit -m "docs: 完成启动周作业"
 git push origin feat/week00-<姓名拼音>
 ```
@@ -131,7 +131,7 @@ docs: 完成启动周作业
 不要使用“修改了一些东西”这类无法说明改动内容的描述。
 
 ## 遇到问题时如何求助
-   2222
+
 先搜索完整报错或询问 AI；仍未解决时，在群里说明：
 
 1. 做了什么操作
