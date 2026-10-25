@@ -54,11 +54,15 @@
         <div class="hp-hero-inner">
           <div class="hp-hero-grid">
             <div class="hp-hero-copy">
-              <!-- The two lines are separated by a space, not by a <br>: the
-                   reference renders "Warning&" as one word sequence, and the
-                   heading must not glue "Early" to "Warning" on phones. -->
+              <!-- The reference splits the heading into two block-level spans
+                   and lets the first one overflow its box (whitespace-nowrap)
+                   rather than wrap. Replaying that structure is what produces
+                   the intended two-line title. -->
               <h1 id="home-title">
-                Chargeback Early Warning&amp; Risk Control Platform
+                <span class="hp-hero-line">
+                  <span class="hp-hero-accent">Chargeback</span> Early Warning
+                </span>
+                <span class="hp-hero-line">&amp; Risk Control Platform</span>
               </h1>
               <p>
                 Stay ahead of disputes. Detect potential threats early,

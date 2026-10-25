@@ -28,16 +28,25 @@
   align-items: center;
 }
 
-/* The hero heading is 48px but must not overflow its 589px column on any
-   screen, so it may break at any point rather than forcing a third line
-   with an over-long word. */
+/* The hero heading is split into two block lines. The first one is set
+   nowrap and is allowed to run slightly past the column (that is exactly what
+   the reference does), which keeps the title on two lines instead of three. */
 .hp-hero-copy h1 {
   font-size: 48px;
   font-weight: 700;
   line-height: 1.7;
   letter-spacing: -0.02em;
   color: var(--foreground);
-  overflow-wrap: break-word;
+}
+
+.hp-hero-line {
+  display: block;
+  white-space: nowrap;
+}
+
+/* Only the first word is accent-coloured, as on the reference. */
+.hp-hero-accent {
+  color: var(--accent);
 }
 
 .hp-hero-copy > p {
@@ -956,6 +965,12 @@
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: normal;
+  }
+
+  /* nowrap would push the title past the screen edge on a phone. */
+  .hp-hero-line {
+    display: inline;
+    white-space: normal;
   }
 
   /* Tighten the hero's vertical rhythm to the reference's phone spacing. */
