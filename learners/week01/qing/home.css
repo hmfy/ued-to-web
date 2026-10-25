@@ -871,6 +871,13 @@
     display: none;
   }
 
+  /* Tighten FAQ answers so each item matches the reference height. */
+  .hp-faq-a-inner p {
+    padding-top: 8px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
   .hp-faq-item {
     padding: 16px;
   }
@@ -896,9 +903,26 @@
     top: 11px;
   }
 
+  /* The cards strip bleeds to the edge on the reference; drop the trailing
+     24px so the section height matches. */
+  .hp-cards {
+    padding-bottom: 0;
+  }
+
+  .hp-card-tag {
+    padding-top: 0;
+  }
+
+  /* FAQ answers are tighter on phones. */
   .hp-faq-a-inner p {
-    padding: 12px 0 0;
-    font-size: 13px;
+    padding-top: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  /* Product rows: the reference uses 8px between head and copy. */
+  .hp-product {
+    gap: 8px;
   }
 }
 
@@ -932,6 +956,15 @@
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: normal;
+  }
+
+  /* Tighten the hero's vertical rhythm to the reference's phone spacing. */
+  .hp-hero-copy > p {
+    margin-top: 12px;
+  }
+
+  .hp-hero-actions {
+    margin-top: 20px;
   }
 
   .hp-btn {
