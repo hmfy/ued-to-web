@@ -187,3 +187,7 @@ Why Choose、FAQs（手风琴）、Contact（深色面板）。
 2. **汉堡按钮没有展开逻辑**：作业不要求交互，只做了语义正确的按钮。
 3. **部分链接是 `#` 占位**：只做了 About 和首页，其余页面未做。
 4. **只做英文版**：参考页本身是英文。
+
+## Merge Request
+
+- PR #2（ued-to-web ← feat/week01-qing）：https://github.com/hmfy/ued-to-web/pull/2
