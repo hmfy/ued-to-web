@@ -1,0 +1,937 @@
+/* ==========================================================================
+   ChargeWipe — About page
+   --------------------------------------------------------------------------
+   Colours and sizes below were measured from the reference page
+   (https://chargewipe.com/about) in the browser, not guessed.
+
+   Layout model
+   ------------
+   • Every section is full width with horizontal padding.
+   • Content is capped at 1152px and centred (at 1440px viewport this leaves
+     144px on each side, which matches the reference exactly).
+   • Sections stack vertically; two-column sections switch to one column on
+     narrow screens.
+
+   Breakpoints: 1024px (lg) and 640px (sm), matching the reference site.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- Fonts */
+/* The reference self-hosts Inter as a variable font (weights 100-900) and
+   pairs it with a metric-matched Arial fallback so the layout does not shift
+   while the font loads. Both details are reproduced here — the fallback's
+   size-adjust ratio is taken from the reference's own stylesheet. */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fonts/inter-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial");
+  ascent-override: 90.44%;
+  descent-override: 22.52%;
+  line-gap-override: 0%;
+  size-adjust: 107.12%;
+}
+
+/* ----------------------------------------------------------------- Tokens */
+:root {
+  --foreground: #111418;
+  --muted: #596877;
+  --accent: #f50340;
+  --accent-soft: #ffebf0;
+  --line: #e2e8f0;
+  --line-strong: #e2e3e8;
+  --surface: #f6f7f9;
+
+  --content: 1152px;
+  --pad-lg: 64px;
+  --pad-sm: 16px;
+  --header-h: 62px;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+
+  --font-sans: "Inter", "Inter Fallback", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+/* ------------------------------------------------------------------ Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--foreground);
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Guard against accidental horizontal overflow on small screens. */
+  overflow-x: hidden;
+}
+
+/* Images never exceed their container, which keeps pages safe on narrow
+   screens. height:auto preserves the aspect ratio. */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+figure {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Visually hidden but available to screen readers. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 8px 16px;
+  background: #fff;
+  border: 1px solid var(--accent);
+}
+
+.skip-link:focus {
+  left: 8px;
+  top: 8px;
+}
+
+/* ----------------------------------------------------------------- Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+  display: grid;
+  grid-template-columns: 167px 1fr auto;
+  align-items: center;
+  gap: 16px;
+  height: var(--header-h);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.brand img {
+  width: 167px;
+  height: 32px;
+}
+
+.primary-nav ul {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.primary-nav a {
+  display: inline-block;
+  padding: 5px 8px;
+  font-size: 14px;
+  line-height: 1.7;
+  transition: color 0.2s ease;
+}
+
+.primary-nav a:hover {
+  color: var(--accent);
+}
+
+/* Current page marker: red text plus a 2px underline, as on the reference. */
+.primary-nav a[aria-current="page"] {
+  color: var(--accent);
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Hamburger: hidden on desktop, where the full nav is visible. */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 32px;
+  height: 32px;
+  padding: 0 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--foreground);
+}
+
+/* ----------------------------------------------------------------- Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.7;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-soft {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.btn-soft:hover {
+  background: #ffe0e8;
+}
+
+.btn-solid {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 4px 2px rgba(0, 0, 0, 0.04);
+}
+
+.btn-solid:hover {
+  background: #dc0339;
+}
+
+/* -------------------------------------------------------------- Section 1 */
+/* About hero: copy on the left, photo on the right. */
+.hero {
+  padding: 108px var(--pad-lg) 72px;
+}
+
+/* Hero: copy 592px | 60px gap | photo 500px = 1152px content column. */
+.hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 500px;
+  align-items: center;
+  gap: 60px;
+  max-width: var(--content);
+  margin: 0 auto;
+}
+
+.hero-copy h1 {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.hero-copy p {
+  margin-top: 24px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.hero-media img {
+  width: 500px;
+  height: 380px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+/* -------------------------------------------------------------- Section 2 */
+/* Detailed introduction: photo on the left, copy on the right. */
+.intro {
+  padding: 72px var(--pad-lg);
+}
+
+/* Intro: photo 500px | 60px gap | copy 592px. */
+.intro-inner {
+  display: grid;
+  grid-template-columns: 500px minmax(0, 1fr);
+  align-items: center;
+  gap: 60px;
+  max-width: var(--content);
+  margin: 0 auto;
+}
+
+.intro-media img {
+  width: 500px;
+  height: 380px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.intro-copy h2 {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.intro-copy p {
+  margin-top: 24px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* -------------------------------------------------------------- Section 3 */
+/* Why ChargeWipe: a banner image with the heading laid over it, then a single
+   centred column of four reasons. */
+.why {
+  padding: 72px var(--pad-lg);
+}
+
+.why-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  max-width: var(--content);
+  margin: 0 auto;
+}
+
+/* The banner is the positioning context for the overlaid text. */
+.why-banner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #0d116e;
+}
+
+.why-banner img {
+  display: block;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+/* Heading + lead sit on the banner, offset 56px from the top and 80px from the
+   left (measured on the reference at 1440px). */
+.why-banner-text {
+  position: absolute;
+  top: 56px;
+  left: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 480px;
+  color: #fff;
+}
+
+.why-banner-text h2 {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.why-banner-text p {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* One column, 800px max, centred — matches the reference stack. */
+.why-list {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.why-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  /* The whole item is inset by 26px; the marker is pulled back out of that
+     indent, so the text column is 774px wide — exactly what the reference
+     measures, and what makes the paragraphs wrap identically. */
+  padding-left: 26px;
+}
+
+/* Heading row: an 18px check-circle marker followed by the heading text. */
+.why-item h3 {
+  position: relative;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+/* Solid disc in the foreground colour. */
+.why-item h3::before {
+  content: "";
+  position: absolute;
+  top: 13px;
+  left: -26px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--foreground);
+}
+
+/* White check mark drawn on top of the disc. */
+.why-item h3::after {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: -21px;
+  width: 7px;
+  height: 4px;
+  border-left: 1.5px solid #fff;
+  border-bottom: 1.5px solid #fff;
+  transform: rotate(-45deg);
+}
+
+.why-item p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* -------------------------------------------------------------- Section 4 */
+.resources {
+  padding: 72px var(--pad-lg);
+  text-align: center;
+}
+
+/* Heading flanked by two hairlines that grow to fill the remaining space.
+   The 56px bottom margin is part of the heading row on the reference, and the
+   figure itself carries no top margin. */
+.resources-heading {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 56px;
+}
+
+.resources-rule {
+  flex: 1;
+  max-width: 240px;
+  height: 1px;
+  background: var(--line);
+}
+
+.resources h2 {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 40px;
+  white-space: nowrap;
+}
+
+.resources-figure {
+  margin-top: 0;
+}
+
+/* Desktop uses the wide partner diagram; the phone gets its own squarer
+   artwork (a <picture> swap in the markup). */
+.resources-figure img {
+  width: 881px;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* ----------------------------------------------------------------- Footer */
+/* Desktop footer: a 6-column grid where the brand block spans two columns and
+   each link group takes one, followed by a hairline-separated address bar. */
+.site-footer {
+  border-top: 1px solid var(--line-strong);
+  background: #fff;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 32px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 64px 48px;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  /* Span the first two columns plus the gap between them. */
+  grid-column: span 2;
+}
+
+.footer-brand img {
+  width: 167px;
+  height: 32px;
+}
+
+/* Logo + tagline form one group; the copyright line sits 32px below it. */
+.footer-brand-main {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.footer-brand p {
+  font-size: 12px;
+  line-height: 15px;
+  color: var(--muted);
+}
+
+.footer-copyright {
+  padding-top: 8px;
+}
+
+.footer-tagline {
+  max-width: 340px;
+  line-height: 1.5;
+}
+
+.footer-brand a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.footer-brand a:hover {
+  text-decoration: underline;
+}
+
+.footer-links {
+  display: contents;
+}
+
+.footer-links > div {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Column caption: muted, 10px, same size as the links themselves. */
+.footer-links h2 {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 15px;
+  color: var(--muted);
+}
+
+.footer-links ul {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  /* 8px of top padding separates the caption from the first link. */
+  padding-top: 8px;
+}
+
+.footer-links li {
+  font-size: 10px;
+  line-height: 15px;
+}
+
+.footer-links li + li {
+  margin-top: 0;
+}
+
+/* The reference sets link text at 10px, uppercase, with 1px tracking. */
+.footer-links a {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--foreground);
+  transition: color 0.15s ease;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+}
+
+/* Address bar: separated from the grid by a hairline. */
+.footer-legal {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.footer-legal-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1184px;
+  margin: 0 auto;
+  padding: 24px 0;
+  border-top: 1px solid var(--line-strong);
+}
+
+/* The address wraps onto two lines on the reference. */
+.footer-legal-inner > p:first-child {
+  max-width: 560px;
+}
+
+.footer-legal p {
+  font-size: 12px;
+  line-height: 18px;
+  color: #7d8286;
+}
+
+.footer-legal a {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.footer-legal a:hover {
+  text-decoration: underline;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+}
+
+/* ------------------------------------------------- Floating contact button */
+.contact-fab {
+  position: fixed;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(245, 3, 64, 0.12);
+  transition: transform 0.2s ease;
+}
+
+.contact-fab:hover {
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+/* --- Tablet and below: stack the two-column sections --------------------- */
+@media (max-width: 1024px) {
+  .header-inner {
+    grid-template-columns: 1fr auto;
+    padding: 0 32px;
+  }
+
+  /* The nav is hidden on narrow screens; the reference does the same and
+     relies on a menu button instead (no interaction required here). */
+  .primary-nav {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .hero,
+  .intro,
+  .why,
+  .resources {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .hero-inner,
+  .intro-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  /* The reference stacks these with flex/grid order: copy first, then the
+     photo. Its copy column uses a 24px gap instead of a paragraph margin. */
+  .hero-copy,
+  .intro-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    order: 1;
+  }
+
+  .hero-media,
+  .intro-media {
+    order: 2;
+  }
+
+  .hero-copy p,
+  .intro-copy p {
+    margin-top: 0;
+  }
+
+  .hero-media img,
+  .intro-media img {
+    width: 100%;
+    height: auto;
+  }
+
+  .why-item h3 {
+    width: auto;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* --- Phone ---------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .header-inner {
+    padding: 0 16px;
+  }
+
+  /* On phones the reference shows the logo and the menu button only. */
+  .header-actions {
+    display: none;
+  }
+
+  .brand img {
+    width: 130px;
+    height: auto;
+  }
+
+  .btn {
+    height: 32px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .hero {
+    padding: 108px 16px 56px;
+  }
+
+  .intro,
+  .why,
+  .resources {
+    padding: 56px 16px;
+  }
+
+  /* The reference drops headings sharply on phones: 40px -> 22px for the
+     hero, with a 1.7 line-height rather than the tight 1 used on desktop. */
+  .hero-copy h1 {
+    font-size: 22px;
+    line-height: 1.7;
+  }
+
+  .intro-copy h2 {
+    font-size: 22px;
+    line-height: 1.7;
+  }
+
+  .hero-copy p,
+  .intro-copy p {
+    font-size: 14px;
+  }
+
+  /* The gap between the banner and the list tightens to 48px on phones. */
+  .why-inner {
+    gap: 48px;
+  }
+
+  /* On phones the banner is shorter and the overlaid text moves in to 20px. */
+  .why-banner {
+    height: 170px;
+    border-radius: 12px;
+  }
+
+  .why-banner img {
+    height: 170px;
+  }
+
+  .why-banner-text {
+    top: 0;
+    left: 0;
+    right: 0;
+    max-width: none;
+    padding: 20px 20px 0;
+    gap: 8px;
+  }
+
+  .why-banner-text h2 {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  .why-banner-text p {
+    font-size: 12px;
+    line-height: 1.5;
+    /* Keep the lead text clear of the banner artwork: 250px wide on the
+       reference at 390px, i.e. ~70% of the 358px content column. */
+    max-width: 250px;
+  }
+
+  /* The reason text stays 16px on the reference even at phone width. */
+  .why-item {
+    padding-left: 26px;
+  }
+
+  .why-item h3 {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .why-item h3::before {
+    top: 4px;
+    left: -26px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .why-item h3::after {
+    top: 11px;
+    left: -21px;
+  }
+
+  .why-item p {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-top: 0;
+  }
+
+  .resources h2 {
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  .resources-heading {
+    gap: 16px;
+    margin-bottom: 56px;
+  }
+
+  /* The reference ships a separate, squarer partner graphic for phones. */
+  .resources-figure img {
+    width: 327px;
+  }
+
+  /* --- Footer on phones -------------------------------------------------- */
+  /* The reference uses a considerably tighter, denser footer on phones:
+     20px/32px padding, a 24px gap between the brand block and the links, and
+     smaller type throughout. */
+  .footer-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px 32px;
+    padding: 32px 20px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+    gap: 8px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .footer-brand p,
+  .footer-address {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .footer-tagline {
+    max-width: none;
+  }
+
+  .footer-links {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px 32px;
+  }
+
+  .footer-links h2 {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  /* No extra top padding on phones — the 8px indent is desktop-only. */
+  .footer-links ul {
+    padding-top: 0;
+  }
+
+  .footer-links a {
+    display: block;
+    font-size: 10px;
+    line-height: 14px;
+    letter-spacing: 0.04em;
+    /* The reference keeps normal case on phones (uppercase is desktop-only). */
+    text-transform: none;
+  }
+
+  /* The address sits under the brand block on phones. */
+  .footer-legal {
+    padding: 0;
+  }
+
+  .footer-legal-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    max-width: none;
+    padding: 0 20px 24px;
+    border-top: none;
+  }
+
+  .footer-legal p {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .footer-legal-inner > p:first-child {
+    max-width: none;
+  }
+
+  /* Keep the floating button clear of the thumb zone on phones. */
+  .contact-fab {
+    width: 40px;
+    height: 40px;
+    right: 10px;
+  }
+}

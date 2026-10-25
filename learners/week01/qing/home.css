@@ -1,0 +1,946 @@
+/* ==========================================================================
+   ChargeWipe — Home page
+   --------------------------------------------------------------------------
+   Loaded after styles.css, so the shared tokens, reset, header, buttons and
+   footer are reused; this file only adds what the home page needs.
+
+   Every number here was measured from https://chargewipe.com/ in a real
+   browser (1440px and 390px) — see README for the comparison table.
+   ========================================================================== */
+
+/* ------------------------------------------------------------- Hero block */
+/* Reference: section padding 40px 64px 72px, content column 1152px. */
+.hp-hero {
+  padding: 40px var(--pad-lg) 72px;
+  background: #fff;
+}
+
+.hp-hero-inner {
+  max-width: var(--content);
+  margin: 0 auto;
+}
+
+/* Two columns 589px + 531px with a 32px gap. */
+.hp-hero-grid {
+  display: grid;
+  grid-template-columns: 589px 531px;
+  gap: 32px;
+  align-items: center;
+}
+
+/* The hero heading is 48px but must not overflow its 589px column on any
+   screen, so it may break at any point rather than forcing a third line
+   with an over-long word. */
+.hp-hero-copy h1 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.7;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+  overflow-wrap: break-word;
+}
+
+.hp-hero-copy > p {
+  max-width: 541px;
+  margin-top: 15px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.hp-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 33px;
+}
+
+/* ---------------------------------------------------------------- Buttons */
+/* The home hero uses a larger button than the header (18px, 56px tall). */
+.hp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 56px;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.7;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.hp-btn-solid {
+  background: var(--accent);
+  color: #fff;
+}
+
+.hp-btn-solid:hover {
+  background: #dc0339;
+}
+
+.hp-btn-soft {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.hp-btn-soft:hover {
+  background: #ffe0e8;
+}
+
+/* The solid button's arrow icon is only meaningful on the home hero. */
+.hp-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+.hp-hero-media {
+  justify-self: end;
+}
+
+.hp-hero-media img {
+  width: 531px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* -------------------------------------------------------- Our Resources */
+/* Sits inside the hero block, centred, 109px below the hero grid. */
+.hp-resources {
+  margin-top: 109px;
+}
+
+.hp-resources-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  height: 44.19px;
+}
+
+/* Both rules are hidden on the reference — the heading stands alone. */
+.hp-res-rule {
+  display: none;
+}
+
+.hp-resources-heading h2 {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.7;
+  text-align: center;
+  color: var(--foreground);
+}
+
+.hp-resources-figure {
+  display: flex;
+  justify-content: center;
+  margin-top: 37px;
+}
+
+.hp-resources-figure img {
+  width: 881px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ------------------------------------------------------- Section shell */
+/* All content sections share 72px 64px padding and a 1152px column. */
+.hp-section {
+  padding: 72px var(--pad-lg);
+}
+
+.hp-container {
+  max-width: var(--content);
+  margin: 0 auto;
+}
+
+.hp-container--narrow {
+  max-width: 960px;
+}
+
+/* -------------------------------------------------------- Section heading */
+/* A "01 / 02 / 03 / 04" number badge above a 40px bold heading. */
+.hp-heading {
+  margin-bottom: 40px;
+}
+
+.hp-heading-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hp-marker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 24px;
+}
+
+/* The number is dark, not the accent colour. */
+.hp-marker-num {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--foreground);
+}
+
+/* A short, muted hairline next to the number. */
+.hp-marker-line {
+  display: block;
+  width: 17px;
+  height: 1px;
+  background: var(--line);
+}
+
+/* Heading size applies wherever an .hp-heading-inner sits, including the
+   why-choose block whose wrapper is not itself an .hp-heading. */
+.hp-heading h2,
+.hp-heading-inner h2 {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+/* Centred variant used by the FAQ block. */
+.hp-heading--center .hp-heading-inner--center {
+  align-items: center;
+}
+
+.hp-marker--center {
+  justify-content: center;
+}
+
+.hp-heading--center h2 {
+  text-align: center;
+}
+
+/* -------------------------------------------------------------- Cards (01) */
+/* Three equal columns, 32px gap; each card is a 8px-radius white tile. */
+.hp-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.hp-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 342px;
+  padding: 17px 33px 33px;
+  border: 1px solid rgba(17, 20, 24, 0.06);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.hp-card-icon {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 16px;
+}
+
+.hp-card h3 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.333;
+  color: var(--foreground);
+}
+
+.hp-card p {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--foreground);
+}
+
+/* Small uppercase label pinned to the bottom of each card. */
+.hp-card-tag {
+  margin-top: auto;
+  padding-top: 24px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---------------------------------------------------------- Products (02) */
+/* Left column 500px (heading + photo), right column 592px of four rows. */
+.hp-products {
+  display: flex;
+  align-items: flex-start;
+  gap: 60px;
+}
+
+.hp-products-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  width: 500px;
+  flex: none;
+}
+
+/* The marker row sits above the heading in its own 80px block; the heading
+   itself must not be narrowed by the 500px product photo column, so it is
+   allowed to run to its natural width. */
+.hp-products-aside .hp-heading {
+  width: 501.47px;
+  max-width: 100%;
+}
+
+.hp-products-aside .hp-heading h2 {
+  white-space: nowrap;
+}
+
+/* Inside this column the heading is a normal block, not a full-width row. */
+.hp-heading--inline {
+  margin-bottom: 0;
+}
+
+.hp-products-media {
+  width: 100%;
+  height: 370px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--accent-soft);
+}
+
+.hp-products-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The right column starts 280px down so the first row lines up with the
+   photo, matching the reference's offset layout. */
+.hp-products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  flex: 1;
+  min-width: 0;
+  padding: 280px 60px 0 0;
+}
+
+.hp-product {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hp-product-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hp-product-head img {
+  width: 24px;
+  height: 24px;
+}
+
+.hp-product h3 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.333;
+  color: var(--foreground);
+}
+
+.hp-product p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--foreground);
+}
+
+.hp-link-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  align-self: flex-start;
+  padding: 10px 0;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.7;
+  color: var(--foreground);
+}
+
+.hp-link-more:hover {
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------------- Why (03) */
+.hp-why-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* A 2px rule that fills the remaining width beside the heading. */
+.hp-why-rule {
+  display: none;
+}
+
+/* List 520px on the left, illustration 600px on the right. */
+.hp-why {
+  display: grid;
+  grid-template-columns: 520px 600px;
+  gap: 32px;
+  align-items: start;
+  margin-top: 64px;
+}
+
+.hp-why-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  /* Indented 32px from the column edge on the reference. */
+  padding: 85px 32px 0;
+}
+
+.hp-why-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--foreground);
+  /* Keep each reason on a single line, as on the reference. */
+  white-space: nowrap;
+}
+
+/* Dark disc with a white tick — same marker as the About page reasons. */
+.hp-check {
+  position: relative;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 4.5px;
+  border-radius: 50%;
+  background: var(--foreground);
+}
+
+.hp-check::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  width: 7px;
+  height: 4px;
+  border-left: 1.5px solid #fff;
+  border-bottom: 1.5px solid #fff;
+  transform: rotate(-45deg);
+}
+
+.hp-why-media {
+  width: 600px;
+  height: 370px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.hp-why-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ------------------------------------------------------------- FAQ (04) */
+/* Each item is a bordered white card; the answer animates open. */
+.hp-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Padding sits on the item, not the button, so the question wraps at the same
+   894px width as the reference (960 - 32 - 32 - 2 borders). */
+.hp-faq-item {
+  padding: 16px 32px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.hp-faq-q {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.hp-faq-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: var(--foreground);
+  text-align: left;
+  cursor: pointer;
+}
+
+.hp-faq-btn > span:first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.hp-faq-btn:hover {
+  background: #fafbfc;
+}
+
+/* Chevron drawn with borders so no icon file is needed. */
+.hp-faq-chevron {
+  position: relative;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--foreground);
+}
+
+
+.hp-faq-chevron::after {
+  content: "";
+  position: absolute;
+  left: 6.5px;
+  top: 7px;
+  width: 5px;
+  height: 5px;
+  border-right: 1.5px solid #fff;
+  border-bottom: 1.5px solid #fff;
+  transform: rotate(45deg);
+  transition: transform 0.25s ease;
+}
+
+/* Expanded state (set by home.js via [aria-expanded]). */
+.hp-faq-btn[aria-expanded="true"] .hp-faq-chevron::after {
+  transform: rotate(-135deg);
+  top: 9px;
+}
+
+/* Answer wrapper animated with grid-template-rows 0fr -> 1fr.
+   The wrapper is a sibling of the <h3> (not of the button), so the selector
+   has to go through the question heading to reach it. */
+.hp-faq-a {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.28s ease;
+}
+
+.hp-faq-item:has(.hp-faq-btn[aria-expanded="true"]) .hp-faq-a {
+  grid-template-rows: 1fr;
+}
+
+.hp-faq-a-inner {
+  overflow: hidden;
+}
+
+.hp-faq-a-inner p {
+  padding: 12px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* --------------------------------------------------------- Contact block */
+.hp-contact {
+  padding: 32px var(--pad-lg);
+}
+
+/* 527px text panel + 625px photo, 16px radius, dark background.
+   The panel height is fixed at 360px on the reference and the photo is
+   cropped to fit, so the section height stays predictable. */
+.hp-contact-panel {
+  display: grid;
+  grid-template-columns: 527px 625px;
+  height: 360px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #111418;
+}
+
+.hp-contact-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 64px;
+  /* Radial glow from the reference's generated gradient. */
+  background: radial-gradient(
+    circle at 28% 62%,
+    rgba(245, 3, 64, 0.42) 0%,
+    rgba(17, 20, 24, 0.92) 55%,
+    #111418 100%
+  );
+}
+
+.hp-contact-copy h2 {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.hp-contact-copy p {
+  max-width: 380px;
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.hp-contact-copy .hp-btn {
+  margin-top: 28px;
+  height: 48px;
+  font-size: 16px;
+}
+
+.hp-contact-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+/* ---- Tablet and below ---------------------------------------------------- */
+@media (max-width: 1024px) {
+  .hp-hero,
+  .hp-section {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .hp-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .hp-hero-copy h1 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .hp-br-desktop {
+    display: none;
+  }
+
+  .hp-hero-media {
+    justify-self: center;
+  }
+
+  .hp-hero-media img {
+    width: 337px;
+  }
+
+  .hp-resources {
+    margin-top: 48px;
+  }
+
+  .hp-resources-heading {
+    gap: 16px;
+  }
+
+  .hp-resources-heading h2 {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  /* On phones the reference turns the three cards into a horizontal,
+     swipeable strip (260px cards) instead of stacking them, which keeps the
+     section short. Negative margin lets the strip bleed to the screen edge. */
+  .hp-cards {
+    display: flex;
+    gap: 16px;
+    margin-right: -24px;
+    padding: 0 24px 4px 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .hp-cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hp-card {
+    flex: 0 0 260px;
+    width: 260px;
+    min-height: 0;
+    gap: 8px;
+    padding: 16px;
+    scroll-snap-align: start;
+  }
+
+  /* Smaller icon and no extra margins: the phone card is a flat 8px stack. */
+  .hp-card-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 0;
+  }
+
+  .hp-card p {
+    margin-top: 0;
+  }
+
+  .hp-card-tag {
+    margin-top: 0;
+    padding-top: 0;
+    line-height: 1.5;
+  }
+
+  .hp-heading h2,
+  .hp-heading-inner h2 {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  .hp-heading {
+    margin-bottom: 24px;
+  }
+
+  .hp-heading-inner {
+    gap: 4px;
+  }
+
+  .hp-marker {
+    height: 18px;
+  }
+
+  .hp-marker-num {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .hp-marker-line {
+    width: 40px;
+  }
+
+  .hp-products {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .hp-products-aside {
+    width: 100%;
+    gap: 24px;
+  }
+
+  /* The "Contact us" link is not shown inside the product list on phones;
+     the dedicated contact block below covers that call to action. */
+  .hp-product .hp-link-more {
+    display: none;
+  }
+
+  .hp-products-list {
+    padding: 0;
+    gap: 24px;
+  }
+
+  .hp-product {
+    gap: 8px;
+  }
+
+  .hp-products-media {
+    height: 242px;
+  }
+
+  .hp-product h3,
+  .hp-card h3 {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .hp-product p,
+  .hp-card p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* On phones the illustration comes first, then a tight 10px-gapped list. */
+  .hp-why {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  .hp-why-media {
+    order: -1;
+    width: 327px;
+    max-width: 100%;
+    height: 164px;
+    margin: 0 auto;
+  }
+
+  .hp-why-list {
+    padding: 0;
+    gap: 10px;
+  }
+
+  .hp-why-list li {
+    gap: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: normal;
+  }
+
+  .hp-contact {
+    padding: 0 24px 36px;
+  }
+
+  /* On phones the reference keeps the panel only 178px tall: the copy sits on
+     top of a darkened strip and the photo is a narrow column at the right. */
+  .hp-contact-panel {
+    position: relative;
+    display: block;
+    height: 178px;
+    grid-template-columns: none;
+  }
+
+  .hp-contact-copy {
+    position: absolute;
+    left: 24px;
+    top: 50%;
+    z-index: 2;
+    width: 149px;
+    padding: 0;
+    background: none;
+    transform: translateY(-50%);
+  }
+
+  .hp-contact-copy h2 {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .hp-contact-copy p {
+    max-width: none;
+    margin-top: 6px;
+    font-size: 10px;
+    line-height: 1.2;
+  }
+
+  .hp-contact-copy .hp-btn {
+    height: 30px;
+    margin-top: 12px;
+    padding: 0 14px;
+    font-size: 12px;
+  }
+
+  .hp-contact-copy .hp-btn img {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Photo pinned to the right edge, 145px wide. */
+  .hp-contact-media {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 145px;
+    overflow: hidden;
+    border-radius: 0 16px 16px 0;
+  }
+
+  .hp-contact-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* The forced line break is a desktop-only alignment detail; on phones the
+     narrower column wraps naturally and the <br> would add a wasted line. */
+  .hp-faq-btn br {
+    display: none;
+  }
+
+  .hp-faq-item {
+    padding: 16px;
+  }
+
+  /* The reference drops FAQ question text to 14px on phones. */
+  .hp-faq-q,
+  .hp-faq-btn {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .hp-faq-chevron {
+    width: 24px;
+    height: 24px;
+  }
+
+  .hp-faq-chevron::after {
+    left: 8.5px;
+    top: 8.5px;
+  }
+
+  .hp-faq-btn[aria-expanded="true"] .hp-faq-chevron::after {
+    top: 11px;
+  }
+
+  .hp-faq-a-inner p {
+    padding: 12px 0 0;
+    font-size: 13px;
+  }
+}
+
+/* ---- Phone --------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .hp-section {
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
+
+  .hp-hero {
+    padding-top: 24px;
+    padding-bottom: 0;
+  }
+
+  /* The reference centres the hero copy on phones. */
+  .hp-hero-copy {
+    text-align: center;
+  }
+
+  .hp-hero-actions {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* Phone heading: centred and a little smaller than the reference's 32px so
+     it wraps to three lines without making the hero taller than the original. */
+  .hp-hero-copy h1 {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: normal;
+  }
+
+  .hp-btn {
+    height: 48px;
+    font-size: 16px;
+    padding: 8px 20px;
+  }
+
+  .hp-card-tag {
+    padding-top: 16px;
+  }
+}
