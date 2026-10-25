@@ -99,10 +99,18 @@
   background: #ffe0e8;
 }
 
-/* The solid button's arrow icon is only meaningful on the home hero. */
-.hp-btn img {
+/* Arrow icon inside a button. It is an inline SVG so it inherits the button's
+   text colour via stroke="currentColor" (an <img> could not do that). */
+.hp-btn-arrow {
   width: 20px;
   height: 20px;
+  flex: none;
+}
+
+/* The contact panel's View button uses a smaller 14px arrow. */
+.hp-contact-copy .hp-btn-arrow {
+  width: 14px;
+  height: 14px;
 }
 
 .hp-hero-media {
@@ -852,7 +860,7 @@
     font-size: 12px;
   }
 
-  .hp-contact-copy .hp-btn img {
+  .hp-contact-copy .hp-btn-arrow {
     width: 14px;
     height: 14px;
   }
