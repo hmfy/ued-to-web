@@ -19,8 +19,9 @@ learners/week01/qing/
 ├── home.html           ← 首页（进阶版）
 ├── styles.css          ← 两页共用：变量 / reset / 导航 / 按钮 / 页脚
 ├── home.css            ← 首页专属样式
-├── home.js             ← 首页 FAQ 展开收起（约 30 行原生 JS）
-├── images/             ← 28 个素材（含手机端专用版本）
+├── nav.js              ← 导航下拉菜单的键盘可达性（约 56 行原生 JS）
+├── home.js             ← 首页 FAQ 展开收起（约 38 行原生 JS）
+├── images/             ← 23 个素材（含手机端专用版本）
 ├── fonts/
 │   └── inter-latin.woff2                ← 自托管 Inter 可变字体
 ├── screenshots/
@@ -33,6 +34,7 @@ learners/week01/qing/
     ├── compare-home.cjs                 ← 首页与线上参考页逐项比对
     ├── check-about.cjs                  ← About 溢出 / 键盘 / 图片 / 语义
     ├── check-home.cjs                   ← 首页 + FAQ 交互测试
+    ├── check-nav.cjs                    ← 导航下拉菜单测试
     └── shoot.cjs                        ← 生成 screenshots/
 ```
 
@@ -481,15 +483,39 @@ buttons.forEach(function (button) {
 桌面端整页误差 **0.18%**，三个区块完全一致；移动端误差 3.0%，
 剩下的是卡片高度和 FAQ 换行带来的累计差。
 
-## 七、首页已知不足
+## 七、导航下拉菜单
 
-1. **移动端整页比参考高 134px**（3.0%）：分散在 01 卡片、02 产品、04 FAQ 三处，
+参考站的主导航有三项带下拉面板（Chargebacks / Merchants / Resources）。我按测得的
+参数复刻了它们，两页共用同一套结构和样式：
+
+| 菜单 | 项数 | 内容 |
+| --- | --- | --- |
+| Chargebacks | 4 | What is Chargeback / Losses & Impacts / Chargeback Alerts / ChargeWipe |
+| Merchants | 3 | Merchant Solutions / Merchant Dashboard / Merchant Support |
+| Resources | 2 | FAQs / Success Stories |
+
+尺寸全部来自实测：面板 **210px 宽**、`border-radius: 8px`、
+`box-shadow: 0 8px 16px rgba(0,0,0,.08)`、内边距 `17px 17px 1px`、
+菜单项 14px 且每项下方留 16px。悬停时右侧小箭头翻转 180°。
+
+**键盘可达性**（这是我自己加的，参考页未验证）：
+
+- 面板展开依赖 CSS `:hover` 和 `:focus-within`，所以 Tab 到导航项时面板会打开
+- 但面板关闭时，里面的链接仍在 DOM 里，会变成「看不见却能聚焦」的陷阱。
+  所以 `nav.js` 在关闭状态下给这些链接加 `tabindex="-1"`，展开时再移除
+- 按 Esc 可关闭面板并把焦点还回导航项
+
+实测：关闭状态下 9 个菜单链接全部 `tabindex="-1"`，Tab 不会掉进不可见区域。
+
+## 八、首页已知不足
+
+1. **移动端整页比参考高 82px**（1.8%）：分散在 01 卡片、02 产品、04 FAQ 三处，
    主要是文字换行行数差异累计，不影响可用性。
-2. **Hero 标题 3 行 vs 参考 2 行**：如「问题 8」所述，是列宽与字号共同决定的，
-   没有强行改字号去凑。
-3. **FAQ 默认全部收起**：参考页也是全部收起，但我没有实现「默认展开第一条」，
+2. **FAQ 默认全部收起**：参考页也是全部收起，但我没有实现「默认展开第一条」，
    如果需要可以加一行 `setOpen(buttons[0], true)`。
-4. **汉堡按钮仍然没有展开逻辑**（与 About 页相同）。
+3. **汉堡按钮仍然没有展开逻辑**（与 About 页相同）。
+4. **`/resources`、`/contact` 等页面未做**：作业只要求 About 和首页，
+   导航里的下拉项和页脚链接指向 `#` 占位。
 
 ## 本地查看
 

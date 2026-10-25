@@ -256,6 +256,11 @@ ul {
   text-decoration: none;
 }
 
+/* Keyboard access to the menus: the parent link opens the panel on focus
+   (:focus-within), and the panel's links are removed from the tab order while
+   closed via the [tabindex="-1"] attribute set in the markup. Keeping the panel
+   in the layout (rather than display:none) preserves the open/close transition. */
+
 .primary-nav .nav-menu a:hover,
 .nav-menu a:hover {
   color: var(--accent);
