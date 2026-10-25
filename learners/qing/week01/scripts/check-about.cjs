@@ -6,8 +6,7 @@
 const puppeteer = require("D:/Documents/deepseek-harness/default-workspace/node_modules/puppeteer-core");
 const path = require("node:path");
 
-const PROJ =
-  "D:\\Documents\\deepseek-harness\\default-workspace\\assets-raw\\ued-to-web-real\\learners\\week01\\qing";
+const PROJ = path.join(__dirname, "..");
 const LOCAL = "file:///" + path.join(PROJ, "index.html").replace(/\\/g, "/");
 
 const WIDTHS = [1920, 1440, 1280, 1024, 900, 768, 640, 480, 390, 360, 320];

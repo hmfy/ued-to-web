@@ -11,7 +11,7 @@ const LOCAL =
   "file:///" +
   path
     .join(
-      "D:\\Documents\\deepseek-harness\\default-workspace\\assets-raw\\ued-to-web-real\\learners\\week01\\qing",
+      path.join(__dirname, ".."),
       "home.html",
     )
     .replace(/\\/g, "/");

@@ -4,8 +4,7 @@ const puppeteer = require("D:/Documents/deepseek-harness/default-workspace/node_
 const path = require("node:path");
 const fs = require("node:fs");
 
-const PROJ =
-  "D:\\Documents\\deepseek-harness\\default-workspace\\assets-raw\\ued-to-web-real\\learners\\week01\\qing";
+const PROJ = path.join(__dirname, "..");
 const LOCAL = "file:///" + path.join(PROJ, "home.html").replace(/\\/g, "/");
 const REF = "https://chargewipe.com/";
 const OUT = "D:\\Documents\\deepseek-harness\\default-workspace\\shots-home";
