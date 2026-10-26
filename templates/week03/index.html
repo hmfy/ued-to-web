@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="第三周 JavaScript 作业模板" />
+    <title>第三周作业 · JavaScript</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main id="top">
+      <section class="hero">
+        <p class="eyebrow">第三周 · JavaScript</p>
+        <h1>本周作业</h1>
+        <p class="hero-copy">HTML 和 CSS 已准备好，本周集中完成 <code>script.js</code>。</p>
+      </section>
+
+      <section class="homework-section" id="homework" aria-labelledby="homework-title">
+        <div class="homework-heading"><div><p class="eyebrow">作业清单</p><h2 id="homework-title">完成这 3 项练习</h2></div><a href="#components">往下开始练习 ↓</a></div>
+        <ol class="homework-list">
+          <li><span class="homework-number">01</span><div><h3>选项卡、弹窗和下拉菜单</h3><p>点选项卡切换内容；打开和关闭弹窗；选择下拉菜单内容。</p></div></li>
+          <li class="homework-primary"><span class="homework-number">02</span><div><span class="homework-badge">重点作业</span><h3>商品搜索和分类</h3><p>输入商品名查找，按分类查看，点击商品将它选中。</p></div></li>
+          <li><span class="homework-number">03</span><div><h3>给商品卡片加动画</h3><p>滚动到商品列表时出现；搜索或切换分类后也要变化。</p></div></li>
+        </ol>
+      </section>
+
+      <section class="section" id="components">
+        <div class="section-heading">
+          <div><p class="eyebrow">小练习 · 01</p><h2>选项卡、弹窗和下拉菜单</h2></div>
+          <p>点击选项卡，让下面的内容跟着变化。</p>
+        </div>
+        <div class="component-grid">
+          <article class="demo-panel tab-panel">
+            <div class="panel-top"><span class="panel-index">A</span><span>选项卡</span></div>
+            <div class="tabs" role="tablist" aria-label="产品分类">
+              <button class="tab is-active" type="button" role="tab" aria-selected="true" data-tab="keyboard" data-image="images/keyboard.png">键盘</button>
+              <button class="tab" type="button" role="tab" aria-selected="false" data-tab="mouse" data-image="images/mouse.png">鼠标</button>
+              <button class="tab" type="button" role="tab" aria-selected="false" data-tab="display" data-image="images/monitor.png">显示器</button>
+            </div>
+            <div class="tab-content" role="tabpanel" aria-live="polite">
+              <img class="product-icon" id="tab-image" src="images/keyboard.png" alt="无线键盘" /><div><strong id="tab-title">无线键盘</strong><p id="tab-description">轻巧手感，让桌面更简洁。</p></div>
+            </div>
+          </article>
+
+          <article class="demo-panel">
+            <div class="panel-top"><span class="panel-index">B</span><span>弹窗</span></div>
+            <div class="modal-demo"><span class="sparkle" aria-hidden="true">✳</span><h3>弹窗</h3><p>点击按钮打开，再试试几种关闭方法。</p><button class="button button-accent" id="open-modal" type="button">打开弹窗 <span aria-hidden="true">↗</span></button></div>
+          </article>
+
+          <article class="demo-panel dropdown-panel">
+            <div class="panel-top"><span class="panel-index">C</span><span>下拉菜单</span></div>
+            <label class="field-label" for="sort-button">商品排序</label>
+            <div class="dropdown-wrap">
+              <button class="dropdown-trigger" id="sort-button" type="button" aria-expanded="false" aria-haspopup="listbox"><span id="sort-label">推荐排序</span><span aria-hidden="true">⌄</span></button>
+              <ul class="dropdown-menu" id="sort-menu" role="listbox" aria-label="排序方式" hidden>
+                <li><button type="button" role="option" data-sort="推荐排序">推荐排序</button></li>
+                <li><button type="button" role="option" data-sort="价格从低到高">价格从低到高</button></li>
+                <li><button type="button" role="option" data-sort="价格从高到低">价格从高到低</button></li>
+              </ul>
+            </div>
+            <p class="hint">选一种排序方式，点击菜单外面可关闭。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section products-section" id="products">
+        <div class="section-heading">
+          <div><p class="eyebrow">小练习 · 02 · 重点作业</p><h2>商品搜索和分类</h2></div>
+          <p>输入商品名查找，按分类查看，点击商品将它选中。</p>
+        </div>
+        <div class="shop-toolbar">
+          <label class="search-box"><span aria-hidden="true">⌕</span><input id="product-search" type="search" placeholder="输入商品名…" autocomplete="off" /></label>
+          <div class="filter-tabs" role="group" aria-label="商品分类">
+            <button class="filter-tab is-active" type="button" data-filter="all">全部 <span>06</span></button>
+            <button class="filter-tab" type="button" data-filter="peripheral">配件 <span>03</span></button>
+            <button class="filter-tab" type="button" data-filter="display">显示器 <span>02</span></button>
+            <button class="filter-tab" type="button" data-filter="furniture">家具 <span>01</span></button>
+          </div>
+        </div>
+        <ul class="product-grid" id="product-list" aria-live="polite">
+          <li class="product-card" data-category="peripheral" data-name="无线键盘" data-price="199"><div class="product-art"><img src="images/keyboard.png" alt="无线键盘" /></div><div class="product-info"><div><p class="product-category">配件 · 键盘</p><h3>无线键盘</h3></div><strong>¥199</strong></div><span class="select-mark" aria-hidden="true">✓</span></li>
+          <li class="product-card" data-category="peripheral" data-name="游戏鼠标" data-price="149"><div class="product-art"><img src="images/mouse.png" alt="游戏鼠标" /></div><div class="product-info"><div><p class="product-category">配件 · 鼠标</p><h3>游戏鼠标</h3></div><strong>¥149</strong></div><span class="select-mark" aria-hidden="true">✓</span></li>
+          <li class="product-card" data-category="display" data-name="27寸显示器" data-price="899"><div class="product-art"><img src="images/monitor.png" alt="27 寸显示器" /></div><div class="product-info"><div><p class="product-category">显示器</p><h3>27 寸显示器</h3></div><strong>¥899</strong></div><span class="select-mark" aria-hidden="true">✓</span></li>
+          <li class="product-card" data-category="furniture" data-name="升降桌" data-price="1299"><div class="product-art"><img src="images/standing-desk.png" alt="升降桌" /></div><div class="product-info"><div><p class="product-category">桌椅</p><h3>升降桌</h3></div><strong>¥1299</strong></div><span class="select-mark" aria-hidden="true">✓</span></li>
+          <li class="product-card" data-category="peripheral" data-name="降噪耳机" data-price="599"><div class="product-art"><img src="images/headphones.png" alt="降噪耳机" /></div><div class="product-info"><div><p class="product-category">配件 · 耳机</p><h3>降噪耳机</h3></div><strong>¥599</strong></div><span class="select-mark" aria-hidden="true">✓</span></li>
+          <li class="product-card" data-category="display" data-name="便携屏" data-price="699"><div class="product-art"><img src="images/portable-monitor.png" alt="便携屏" /></div><div class="product-info"><div><p class="product-category">显示器</p><h3>便携屏</h3></div><strong>¥699</strong></div><span class="select-mark" aria-hidden="true">✓</span></li>
+          <li class="empty-state" id="empty-state" hidden>没有找到相关商品，试试其他关键词。</li>
+        </ul>
+      </section>
+
+      <section class="animation-section" aria-labelledby="animation-homework-title">
+        <div class="section-heading animation-homework">
+          <div><p class="eyebrow">小练习 · 03</p><h2 id="animation-homework-title">给这些商品卡片加动画</h2></div>
+          <ol class="animation-homework-list">
+            <li>页面滚动到商品列表时，商品列表的出场动画。</li>
+            <li>搜索或切换分类后，卡片列表变化的动画。</li>
+          </ol>
+        </div>
+      </section>
+    </main>
+
+    <div class="modal-backdrop" id="modal-backdrop" hidden>
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="modal-close" id="close-modal" type="button" aria-label="关闭弹窗">×</button>
+        <span class="modal-icon">✳</span><p class="eyebrow">弹窗练习</p><h2 id="modal-title">弹窗打开了</h2><p>点击右上角、暗色区域，或按 Esc 键关闭。</p><button class="button button-dark" id="confirm-modal" type="button">关闭弹窗</button>
+      </section>
+    </div>
+  </body>
+</html>
